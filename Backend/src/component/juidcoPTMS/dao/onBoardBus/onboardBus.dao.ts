@@ -80,14 +80,16 @@ class BusOnboarding {
       },
     };
 
-    query.where = {
-      ulb_id: ulb_id
-    }
-
     if (id !== "" && id !== "undefined") {
       query.where = {
         register_no: id,
+        ulb_id: ulb_id
       };
+    }else{
+      query.where = {
+        ulb_id: ulb_id
+      };
+      
     }
 
     if (search !== "" && typeof search === "string" && search !== "undefined") {
