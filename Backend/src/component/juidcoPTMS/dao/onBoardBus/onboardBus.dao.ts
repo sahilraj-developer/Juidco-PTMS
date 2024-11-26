@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request } from "express";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { generateRes } from "../../../../util/generateRes";
+import { imageUploaderV2 } from "../../../../util/imageUploaderV2";
 
 type TOnBoardingBusData = {
   id: number;
@@ -22,6 +24,7 @@ class BusOnboarding {
       registration_cert,
       pollution_cert,
     } = req.body as TOnBoardingBusData;
+    console.log("req.bodyreq.body",req.body)
 
     const { ulb_id } = req.body.auth
 
@@ -35,6 +38,10 @@ class BusOnboarding {
         validation_error: "Already Exist",
       });
     }
+
+    // const uploaded: string[] = await imageUploaderV2(pollution_cert)
+    console.log("uploadeduploadeduploadeduploaded",pollution_cert)
+    console.log("uploadeduploadeduploadeduploaded typeof", typeof pollution_cert)
 
     const query: Prisma.bus_masterCreateArgs = {
       data: {

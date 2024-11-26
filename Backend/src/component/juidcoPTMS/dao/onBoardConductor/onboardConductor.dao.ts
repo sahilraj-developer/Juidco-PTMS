@@ -91,6 +91,8 @@ class ConductorOnBoarding {
 
     const { ulb_id } = req.body.auth
 
+    console.log("ididid",id)
+
     const query: Prisma.conductor_masterFindManyArgs = {
       skip: (page - 1) * limit,
       take: limit,
@@ -109,11 +111,6 @@ class ConductorOnBoarding {
       },
     };
 
-    if (id !== "" && id !== "undefined") {
-      query.where = {
-        cunique_id: id,
-      };
-    }
 
     if (search !== "" && typeof search === "string" && search !== "undefined") {
       query.where = {
@@ -128,9 +125,18 @@ class ConductorOnBoarding {
       };
     }
 
-    query.where = {
-      ulb_id: ulb_id
+    if (id !== "" && id !== "undefined") {
+      query.where = {
+        ulb_id: ulb_id,
+        cunique_id: id
+      }
+    }else{
+      query.where = {
+        ulb_id: ulb_id,
+      }
     }
+
+    
 
     if (req?.query?.view) {
       query.orderBy = [
@@ -148,6 +154,7 @@ class ConductorOnBoarding {
       ]
     }
 
+    console.log("Query",query)
     const [data, count] = await prisma.$transaction([
       prisma.conductor_master.findMany(query) as any,
       prisma.conductor_master.count(),

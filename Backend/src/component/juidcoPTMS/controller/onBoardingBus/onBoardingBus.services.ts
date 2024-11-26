@@ -27,6 +27,7 @@ export default class OnBoardingBusServices {
       registration_cert,
       pollution_cert,
     } = req.body;
+    console.log("req.body",req.body)
 
     try {
       // ---------------------------- VALIDATION --------------------------------------------//
