@@ -46,6 +46,7 @@ export class UploadImgServices {
       console.log(data, "data =====>>");
 
       const uploadedImageUrls = await imageUploaderV2([data]); 
+      console.log("uploadedImageUrls",uploadedImageUrls)
 
       if (!uploadedImageUrls || uploadedImageUrls.length === 0) {
         return CommonRes.SERVER_ERROR(
