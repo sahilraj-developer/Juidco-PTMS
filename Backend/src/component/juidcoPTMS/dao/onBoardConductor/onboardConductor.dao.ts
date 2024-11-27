@@ -35,6 +35,7 @@ class ConductorOnBoarding {
     } = req.body as TOnBoardingConductorData;
 
     console.log("req.body",req.body)
+    
     const { ulb_id } = req.body.auth
 
     const isExistingConductor = await prisma.conductor_master.findUnique({
